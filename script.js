@@ -48,9 +48,9 @@ class Snake {
         if (this.body.length) {
             this.body[0] = [this.head.x, this.head.y];
         }
-        for (let i = 0; i < snake.body.length; i++) {
+        for (let i = 0; i < this.body.length; i++) {
             this.context.fillStyle = 'green';
-            this.context.fillRect(snake.body[i][0], snake.body[i][1], this.blockSize, this.blockSize);
+            this.context.fillRect(this.body[i][0], this.body[i][1], this.blockSize, this.blockSize);
         }
     }
 
@@ -80,7 +80,8 @@ class Food {
 }
 let gameOver = false;
 let board = new Board();
-let snake = new Snake(board.domElement, board.context);
+let snake1 = new Snake(board.domElement, board.context);
+let snake2 = new Snake(board.domElement, board.context);
 let food = new Food(board.domElement, board.context);
 document.addEventListener('DOMContentLoaded', () => {
     // board.make();
@@ -88,30 +89,53 @@ document.addEventListener('DOMContentLoaded', () => {
     // food.make();
 
     document.addEventListener('keyup', changeDirection);
+    document.addEventListener('keydown', changeDirection2);
     setInterval(update, 1000/10);
 
 });
 
+function changeDirection2(e) {
+    // snake.head.x += snake.velocityX * snake.blockSize;
+    // snake.head.y += snake.velocityY * snake.blockSize;
+    // Snake 1
+    if (e.code == 'KeyW' && snake2.velocityY != 1) {
+        snake2.velocityX = 0;
+        snake2.velocityY = -1;
+    }
+    else if (e.code == 'KeyS' && snake2.velocityY != -1) {
+        snake2.velocityX = 0;
+        snake2.velocityY = 1;
+    }
+    else if (e.code == 'KeyA' && snake2.velocityX != 1) {
+        snake2.velocityX = -1;
+        snake2.velocityY = 0;
+    }
+    else if (e.code == 'KeyD' && snake2.velocityX != -1) {
+        snake2.velocityX = 1;
+        snake2.velocityY = 0;
+    }    
+}
 
 function changeDirection(e) {
     // snake.head.x += snake.velocityX * snake.blockSize;
     // snake.head.y += snake.velocityY * snake.blockSize;
-    if (e.code == 'ArrowUp' && snake.velocityY != 1) {
-        snake.velocityX = 0;
-        snake.velocityY = -1;
+    // Snake 1
+    if (e.code == 'ArrowUp' && snake1.velocityY != 1) {
+        snake1.velocityX = 0;
+        snake1.velocityY = -1;
     }
-    else if (e.code == 'ArrowDown' && snake.velocityY != -1) {
-        snake.velocityX = 0;
-        snake.velocityY = 1;
+    else if (e.code == 'ArrowDown' && snake1.velocityY != -1) {
+        snake1.velocityX = 0;
+        snake1.velocityY = 1;
     }
-    else if (e.code == 'ArrowLeft' && snake.velocityX != 1) {
-        snake.velocityX = -1;
-        snake.velocityY = 0;
+    else if (e.code == 'ArrowLeft' && snake1.velocityX != 1) {
+        snake1.velocityX = -1;
+        snake1.velocityY = 0;
     }
-    else if (e.code == 'ArrowRight' && snake.velocityX != -1) {
-        snake.velocityX = 1;
-        snake.velocityY = 0;
-    }
+    else if (e.code == 'ArrowRight' && snake1.velocityX != -1) {
+        snake1.velocityX = 1;
+        snake1.velocityY = 0;
+    }    
 }
 
 
@@ -119,18 +143,20 @@ function update() {
     if (gameOver == true) return;
     board.make();
     food.make();
-    snake.eat(food);
+    snake1.eat(food);
+    snake2.eat(food);
 
-    snake.make();
+    snake1.make();
+    snake2.make();
 
-    if (snake.head.x < 0 || snake.head.x > board.blockSize * board.columns ||
-        snake.head.y < 0 || snake.head.y > board.blockSize * board.rows) {
+    if (snake1.head.x < 0 || snake1.head.x > board.blockSize * board.columns ||
+        snake1.head.y < 0 || snake1.head.y > board.blockSize * board.rows) {
         gameOver = true;
         alert("Game Over");
     };
 
-    for (let i = 0; i < snake.body.length; i++) {
-        if (snake.head.x == snake.body[i][0] && snake.head.y == snake.body[i][1]) {
+    for (let i = 0; i < snake1.body.length; i++) {
+        if (snake1.head.x == snake1.body[i][0] && snake1.head.y == snake1.body[i][1]) {
             gameOver = true;
             alert("Game Over");
         }
