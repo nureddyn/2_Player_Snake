@@ -1,8 +1,8 @@
 class Board {
-    constructor(blockSize, rows, columns) {
+    constructor(rows, columns) {
         this.domElement = document.querySelector('.board');
         this.context = this.domElement.getContext('2d');
-        this.blockSize = blockSize;
+        this.blockSize = 25;
         this.rows = rows;
         this.columns = columns;
         this.domElement.height = this.rows * this.blockSize;
@@ -15,10 +15,26 @@ class Board {
     }
 }
 
+class Snake {
+    constructor(x, y) {
+        this.domElement = document.querySelector('.board');
+        this.context = this.domElement.getContext('2d');
+        this.blockSize = 25;
+        this.head = {x: x, y: y};
+        this.body = [];
 
-let board = new Board(25, 20, 20);
+    }
+    make(color='green') {
+        this.context.fillStyle = color;
+        this.context.fillRect(this.head.x, this.head.y, this.blockSize, this.blockSize);
+    }
+}
+
+let board = new Board(20, 20);
+let snake = new Snake(200, 200);
 
 document.addEventListener('DOMContentLoaded', () => {
     board.make();
+    snake.make()
 });
 
