@@ -94,27 +94,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
-function changeDirection2(e) {
-    // snake.head.x += snake.velocityX * snake.blockSize;
-    // snake.head.y += snake.velocityY * snake.blockSize;
-    // Snake 1
-    if (e.code == 'KeyW' && snake2.velocityY != 1) {
-        snake2.velocityX = 0;
-        snake2.velocityY = -1;
-    }
-    else if (e.code == 'KeyS' && snake2.velocityY != -1) {
-        snake2.velocityX = 0;
-        snake2.velocityY = 1;
-    }
-    else if (e.code == 'KeyA' && snake2.velocityX != 1) {
-        snake2.velocityX = -1;
-        snake2.velocityY = 0;
-    }
-    else if (e.code == 'KeyD' && snake2.velocityX != -1) {
-        snake2.velocityX = 1;
-        snake2.velocityY = 0;
-    }    
-}
 
 function changeDirection(e) {
     // snake.head.x += snake.velocityX * snake.blockSize;
@@ -139,6 +118,29 @@ function changeDirection(e) {
 }
 
 
+function changeDirection2(e) {
+    // snake.head.x += snake.velocityX * snake.blockSize;
+    // snake.head.y += snake.velocityY * snake.blockSize;
+    // Snake 1
+    if (e.code == 'KeyW' && snake2.velocityY != 1) {
+        snake2.velocityX = 0;
+        snake2.velocityY = -1;
+    }
+    else if (e.code == 'KeyS' && snake2.velocityY != -1) {
+        snake2.velocityX = 0;
+        snake2.velocityY = 1;
+    }
+    else if (e.code == 'KeyA' && snake2.velocityX != 1) {
+        snake2.velocityX = -1;
+        snake2.velocityY = 0;
+    }
+    else if (e.code == 'KeyD' && snake2.velocityX != -1) {
+        snake2.velocityX = 1;
+        snake2.velocityY = 0;
+    }    
+}
+
+
 function update() {
     if (gameOver == true) return;
     board.make();
@@ -153,10 +155,21 @@ function update() {
         snake1.head.y < 0 || snake1.head.y > board.blockSize * board.rows) {
         gameOver = true;
         alert("Game Over");
+    }
+    else if (snake2.head.x < 0 || snake2.head.x > board.blockSize * board.columns ||
+        snake2.head.y < 0 || snake2.head.y > board.blockSize * board.rows) {
+        gameOver = true;
+        alert("Game Over");
     };
-
     for (let i = 0; i < snake1.body.length; i++) {
         if (snake1.head.x == snake1.body[i][0] && snake1.head.y == snake1.body[i][1]) {
+            gameOver = true;
+            alert("Game Over");
+        }
+    }
+
+    for (let i = 0; i < snake2.body.length; i++) {
+        if (snake2.head.x == snake2.body[i][0] && snake2.head.y == snake2.body[i][1]) {
             gameOver = true;
             alert("Game Over");
         }
