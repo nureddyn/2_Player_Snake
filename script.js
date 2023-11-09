@@ -155,16 +155,19 @@ function update() {
         snake1.head.y < 0 || snake1.head.y > board.blockSize * board.rows) {
         gameOver = true;
         alert("Game Over");
+        alert("Player 2 wins");
     }
     else if (snake2.head.x < 0 || snake2.head.x > board.blockSize * board.columns ||
         snake2.head.y < 0 || snake2.head.y > board.blockSize * board.rows) {
         gameOver = true;
         alert("Game Over");
+        alert("Player 1 wins");
     };
     for (let i = 0; i < snake1.body.length; i++) {
         if (snake1.head.x == snake1.body[i][0] && snake1.head.y == snake1.body[i][1]) {
             gameOver = true;
             alert("Game Over");
+            alert("Player 2 wins");
         }
     }
 
@@ -172,6 +175,7 @@ function update() {
         if (snake2.head.x == snake2.body[i][0] && snake2.head.y == snake2.body[i][1]) {
             gameOver = true;
             alert("Game Over");
+            alert("Player 1 wins");
         }
     }
 }
