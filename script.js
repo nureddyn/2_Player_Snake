@@ -40,6 +40,17 @@ class Snake {
             this.body.push([food.position.x, food.position.y]);
             food.relocateFood();
         }
+
+        for (let i = this.body.length-1; i > 0; i--) {
+            this.body[i] = this.body[i-1];
+        }
+    
+        if (this.body.length) {
+            this.body[0] = [this.head.x, this.head.y];
+        }
+        for (let i = 0; i < snake.body.length; i++) {
+            this.context.fillRect(snake.body[i][0], snake.body[i][1], this.blockSize, this.blockSize);
+        }
     }
 
 }
@@ -71,9 +82,9 @@ let board = new Board();
 let snake = new Snake(board.domElement, board.context);
 let food = new Food(board.domElement, board.context);
 document.addEventListener('DOMContentLoaded', () => {
-    board.make();
-    snake.make();
-    food.make();
+    // board.make();
+    // snake.make();
+    // food.make();
 
     document.addEventListener('keyup', changeDirection);
     setInterval(update, 1000/10);
@@ -82,8 +93,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 function changeDirection(e) {
-    snake.head.x += snake.velocityX * snake.blockSize;
-    snake.head.y += snake.velocityY * snake.blockSize;
+    // snake.head.x += snake.velocityX * snake.blockSize;
+    // snake.head.y += snake.velocityY * snake.blockSize;
     if (e.code == 'ArrowUp' && snake.velocityY != 1) {
         snake.velocityX = 0;
         snake.velocityY = -1;
@@ -107,6 +118,7 @@ function update() {
     board.make();
     food.make();
     snake.eat(food);
+
     snake.make();
 }
 
