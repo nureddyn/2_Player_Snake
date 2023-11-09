@@ -30,11 +30,30 @@ class Snake {
     }
 }
 
+class Food {
+    constructor() {
+        this.domElement = document.querySelector('.board');
+        this.context = this.domElement.getContext('2d');
+        this.blockSize = 25;
+        this.position = {
+            x: Math.floor((Math.random()*20)*this.blockSize),
+            y: Math.floor((Math.random()*20)*this.blockSize),
+        };
+
+    }
+    make(color='purple') {
+        this.context.fillStyle = color;
+        this.context.fillRect(this.position.x, this.position.y, this.blockSize, this.blockSize);
+    }
+}
+
 let board = new Board(20, 20);
 let snake = new Snake(200, 200);
-
+let food = new Food()
 document.addEventListener('DOMContentLoaded', () => {
     board.make();
-    snake.make()
+    snake.make();
+    food.make();
+
 });
 
