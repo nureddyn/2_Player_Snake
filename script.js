@@ -19,11 +19,11 @@ class Board {
 }
 
 class Snake {
-    constructor(board, context) {
+    constructor(board, context, position) {
         this.domElement = board;
         this.context = context;
         this.blockSize = 25;
-        this.head = {x: this.blockSize*5, y: this.blockSize*5};
+        this.head = {x: this.blockSize*position, y: this.blockSize*position};
         this.body = [];
         this.velocityX = 0;
         this.velocityY = 0;
@@ -80,8 +80,8 @@ class Food {
 }
 let gameOver = false;
 let board = new Board();
-let snake1 = new Snake(board.domElement, board.context);
-let snake2 = new Snake(board.domElement, board.context);
+let snake1 = new Snake(board.domElement, board.context, 18);
+let snake2 = new Snake(board.domElement, board.context, 1);
 let food = new Food(board.domElement, board.context);
 document.addEventListener('DOMContentLoaded', () => {
     // board.make();
@@ -162,7 +162,13 @@ function update() {
         gameOver = true;
         alert("Game Over");
         alert("Player 1 wins");
-    };
+    }
+    else if (snake1.head.x == snake2.head.x && snake1.head.y == snake2.head.y) {
+        alert("Game Over");
+        alert("Tie");
+        document.location.reload();
+    }
+
     for (let i = 0; i < snake1.body.length; i++) {
         if (snake1.head.x == snake1.body[i][0] && snake1.head.y == snake1.body[i][1]) {
             gameOver = true;
