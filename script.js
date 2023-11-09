@@ -49,6 +49,7 @@ class Snake {
             this.body[0] = [this.head.x, this.head.y];
         }
         for (let i = 0; i < snake.body.length; i++) {
+            this.context.fillStyle = 'green';
             this.context.fillRect(snake.body[i][0], snake.body[i][1], this.blockSize, this.blockSize);
         }
     }
@@ -77,7 +78,7 @@ class Food {
         };
     }
 }
-
+let gameOver = false;
 let board = new Board();
 let snake = new Snake(board.domElement, board.context);
 let food = new Food(board.domElement, board.context);
@@ -115,10 +116,24 @@ function changeDirection(e) {
 
 
 function update() {
+    if (gameOver == true) return;
     board.make();
     food.make();
     snake.eat(food);
 
     snake.make();
+
+    if (snake.head.x < 0 || snake.head.x > board.blockSize * board.columns ||
+        snake.head.y < 0 || snake.head.y > board.blockSize * board.rows) {
+        gameOver = true;
+        alert("Game Over");
+    };
+
+    for (let i = 0; i < snake.body.length; i++) {
+        if (snake.head.x == snake.body[i][0] && snake.head.y == snake.body[i][1]) {
+            gameOver = true;
+            alert("Game Over");
+        }
+    }
 }
 
