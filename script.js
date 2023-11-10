@@ -163,7 +163,8 @@ function update() {
         alert("Game Over");
         alert("Player 1 wins");
     }
-    else if (snake1.head.x == snake2.head.x && snake1.head.y == snake2.head.y) {
+    else if (Math.round(snake1.head.x / 25) == Math.round(snake2.head.x / 25)
+            && Math.round(snake1.head.y / 25) == Math.round(snake2.head.y / 25)) {
         alert("Game Over");
         alert("Tie");
         document.location.reload();
