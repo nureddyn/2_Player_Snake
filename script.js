@@ -6,7 +6,7 @@ class Board {
         this.rows = 20;
         this.columns = 20;
         this.domElement.height = this.rows * this.blockSize;
-        this.domElement.width = this.columns * this.blockSize; 
+        this.domElement.width = this.columns * this.blockSize;
     }
 
     make(color='black') {
@@ -44,7 +44,7 @@ class Snake {
         for (let i = this.body.length-1; i > 0; i--) {
             this.body[i] = this.body[i-1];
         }
-    
+
         if (this.body.length) {
             this.body[0] = [this.head.x, this.head.y];
         }
@@ -88,8 +88,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // snake.make();
     // food.make();
 
-    document.addEventListener('keyup', changeDirection);
-    document.addEventListener('keydown', changeDirection2);
+    document.addEventListener('keydown', changeDirection);
+    document.addEventListener('keydown', changeDirection);
     setInterval(update, 1000/10);
 
 });
@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function changeDirection(e) {
     // snake.head.x += snake.velocityX * snake.blockSize;
     // snake.head.y += snake.velocityY * snake.blockSize;
-    // Snake 1
+    // Snake 1 events
     if (e.code == 'ArrowUp' && snake1.velocityY != 1) {
         snake1.velocityX = 0;
         snake1.velocityY = -1;
@@ -114,15 +114,9 @@ function changeDirection(e) {
     else if (e.code == 'ArrowRight' && snake1.velocityX != -1) {
         snake1.velocityX = 1;
         snake1.velocityY = 0;
-    }    
-}
-
-
-function changeDirection2(e) {
-    // snake.head.x += snake.velocityX * snake.blockSize;
-    // snake.head.y += snake.velocityY * snake.blockSize;
-    // Snake 1
-    if (e.code == 'KeyW' && snake2.velocityY != 1) {
+    }
+    // Snake 2 events
+    else if (e.code == 'KeyW' && snake2.velocityY != 1) {
         snake2.velocityX = 0;
         snake2.velocityY = -1;
     }
@@ -137,9 +131,8 @@ function changeDirection2(e) {
     else if (e.code == 'KeyD' && snake2.velocityX != -1) {
         snake2.velocityX = 1;
         snake2.velocityY = 0;
-    }    
+    }
 }
-
 
 function update() {
     if (gameOver == true) return;
@@ -151,14 +144,14 @@ function update() {
     snake1.make();
     snake2.make();
 
-    if (snake1.head.x < 0 || snake1.head.x > board.blockSize * board.columns ||
-        snake1.head.y < 0 || snake1.head.y > board.blockSize * board.rows) {
+    if (snake1.head.x < 0 || snake1.head.x > (board.blockSize * board.columns) - 1 ||
+        snake1.head.y < 0 || snake1.head.y > (board.blockSize * board.rows) - 1) {
         gameOver = true;
         alert("Game Over");
         alert("Player 2 wins");
     }
-    else if (snake2.head.x < 0 || snake2.head.x > board.blockSize * board.columns ||
-        snake2.head.y < 0 || snake2.head.y > board.blockSize * board.rows) {
+    else if (snake2.head.x < 0 || snake2.head.x > (board.blockSize * board.columns) - 1 ||
+        snake2.head.y < 0 || snake2.head.y > (board.blockSize * board.rows) - 1) {
         gameOver = true;
         alert("Game Over");
         alert("Player 1 wins");
