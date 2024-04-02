@@ -9,15 +9,32 @@
 </head>
 <body>
 
-    <aside class="left"></aside>
+    <aside class="left">
+        <div class="buttons-left">
+            <div class="button-w">W</div>
+            <div class="button-a">A</div>
+            <div class="button-s">S</div>
+            <div class="button-d">D</div>
+        </div>
+    </aside>
     <div class="center">
-        <header>
-            <h1>Snake</h1>
-        </header>
+        <div class="flex-container">
+            <header>
+                <h1>2 Player Snake</h1>
+            </header>
+            <div class="restart-container">
+                <button class="restart-button" onclick="location.reload()">Restart</button>
+            </div>
+        </div>
         <canvas class="board"></canvas>
     </div>
     <aside class="right">
-        <button onclick="location.reload()">Restart</button>
+        <div class="buttons-right">
+            <div class="button-up">&#11205</div>
+            <div class="button-left">&#11207</div>
+            <div class="button-down">&#11206</div>
+            <div class="button-right">&#11208</div>
+        </div>
     </aside>
 </body>
 </html>

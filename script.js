@@ -84,20 +84,75 @@ let snake1 = new Snake(board.domElement, board.context, 18);
 let snake2 = new Snake(board.domElement, board.context, 1);
 let food = new Food(board.domElement, board.context);
 document.addEventListener('DOMContentLoaded', () => {
-    // board.make();
-    // snake.make();
-    // food.make();
 
     document.addEventListener('keydown', changeDirection);
     document.addEventListener('keydown', changeDirection);
     setInterval(update, 1000/10);
 
+
+
+    // DOM manipulation
+    let buttonsLeft = document.querySelector(".buttons-left");
+    let buttonsRight = document.querySelector(".buttons-right");
+
+    let buttonsLeftDiv = document.createElement("div");
+    let buttonW = document.createElement("div");
+    let buttonA = document.createElement("div");
+    let buttonS = document.createElement("div");
+    let buttonD = document.createElement("div");
+
+    buttonsLeftDiv.setAttribute("class", "buttons-left");
+    buttonW.setAttribute("class", "button-w");
+    buttonW.innerText = "W";
+    buttonA.setAttribute("class", "button-a");
+    buttonA.innerText = "A";
+    buttonS.setAttribute("class", "button-s");
+    buttonS.innerText = "S";
+    buttonD.setAttribute("class", "button-d");
+    buttonD.innerText = "D";
+
+    //
+    let buttonsRightDiv = document.createElement("div");
+    let buttonUp = document.createElement("div");
+    let buttonLeft = document.createElement("div");
+    let buttonDown = document.createElement("div");
+    let buttonRight = document.createElement("div");
+
+    buttonsRightDiv.setAttribute("class", "buttons-right");
+    buttonUp.setAttribute("class", "button-w");
+    buttonUp.innerHTML = "&#11205";
+    buttonLeft.setAttribute("class", "button-a");
+    buttonLeft.innerHTML = "&#11207";
+    buttonDown.setAttribute("class", "button-s");
+    buttonDown.innerHTML = "&#11206";
+    buttonRight.setAttribute("class", "button-d");
+    buttonRight.innerHTML = "&#11208";
+
+    window.onresize = function() {
+        if (window.screen.width < 600
+            && document.querySelector(".buttons-left")
+            && document.querySelector(".buttons-right")) {
+            document.querySelector(".buttons-left").innerHTML = '';
+            document.querySelector(".buttons-left").remove();
+
+            document.querySelector(".buttons-right").innerHTML = '';
+            document.querySelector(".buttons-right").remove();
+
+        } else if (window.screen.width >= 600
+            && !document.querySelector(".buttons-left")
+            && !document.querySelector(".buttons-right")) {
+                buttonsLeftDiv.append(buttonW, buttonA, buttonS, buttonD);
+                document.querySelector(".left").append(buttonsLeftDiv);
+                buttonsRightDiv.append(buttonUp, buttonLeft, buttonDown, buttonRight);
+                document.querySelector(".right").append(buttonsRightDiv);
+            
+        }
+    }
+
 });
 
 
 function changeDirection(e) {
-    // snake.head.x += snake.velocityX * snake.blockSize;
-    // snake.head.y += snake.velocityY * snake.blockSize;
     // Snake 1 events
     if (e.code == 'ArrowUp' && snake1.velocityY != 1) {
         snake1.velocityX = 0;
