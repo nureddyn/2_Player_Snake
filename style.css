@@ -39,7 +39,9 @@ header {
         padding-top: 25%;
         margin-left: 2em;
     }
-    
+    .btn {
+        background: #7AA2E3;
+    }
     .button-w, .button-a, .button-s, .button-d,
     .button-up, .button-left, .button-down, .button-right {
         width: 2em;

@@ -151,41 +151,77 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
+// Change button appearance
+async function buttonClicked(button) {
+    let baseColor = button.style.background;
+    // button.style.background = `mix(${baseColor}, black, 25%)`;
+
+    button.style.background = "#387ADF";
+    const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
+    await sleep(100);
+    button.style.background = baseColor;
+};
 
 function changeDirection(e) {
+
+    let button;
     // Snake 1 events
     if (e.code == 'ArrowUp' && snake1.velocityY != 1) {
         snake1.velocityX = 0;
         snake1.velocityY = -1;
+
+        button = document.querySelector(".button-up");
+        buttonClicked(button);
     }
     else if (e.code == 'ArrowDown' && snake1.velocityY != -1) {
         snake1.velocityX = 0;
         snake1.velocityY = 1;
+
+        button = document.querySelector(".button-down");
+        buttonClicked(button);
     }
     else if (e.code == 'ArrowLeft' && snake1.velocityX != 1) {
         snake1.velocityX = -1;
         snake1.velocityY = 0;
+
+        button = document.querySelector(".button-left");
+        buttonClicked(button);
     }
     else if (e.code == 'ArrowRight' && snake1.velocityX != -1) {
         snake1.velocityX = 1;
         snake1.velocityY = 0;
+
+        button = document.querySelector(".button-right");
+        buttonClicked(button);
     }
     // Snake 2 events
     else if (e.code == 'KeyW' && snake2.velocityY != 1) {
         snake2.velocityX = 0;
         snake2.velocityY = -1;
+
+        button = document.querySelector(".button-w");
+        buttonClicked(button);
     }
     else if (e.code == 'KeyS' && snake2.velocityY != -1) {
         snake2.velocityX = 0;
         snake2.velocityY = 1;
+
+        button = document.querySelector(".button-s");
+        buttonClicked(button);
     }
     else if (e.code == 'KeyA' && snake2.velocityX != 1) {
         snake2.velocityX = -1;
         snake2.velocityY = 0;
+
+        button = document.querySelector(".button-a");
+        buttonClicked(button);
     }
     else if (e.code == 'KeyD' && snake2.velocityX != -1) {
         snake2.velocityX = 1;
         snake2.velocityY = 0;
+
+        button = document.querySelector(".button-d");
+        buttonClicked(button);
     }
 }
 
