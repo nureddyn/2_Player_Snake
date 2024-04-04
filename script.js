@@ -102,13 +102,13 @@ document.addEventListener('DOMContentLoaded', () => {
     let buttonD = document.createElement("div");
 
     buttonsLeftDiv.setAttribute("class", "buttons-left");
-    buttonW.setAttribute("class", "button-w");
+    buttonW.setAttribute("class", "btn button-w");
     buttonW.innerText = "W";
-    buttonA.setAttribute("class", "button-a");
+    buttonA.setAttribute("class", "btn button-a");
     buttonA.innerText = "A";
-    buttonS.setAttribute("class", "button-s");
+    buttonS.setAttribute("class", "btn button-s");
     buttonS.innerText = "S";
-    buttonD.setAttribute("class", "button-d");
+    buttonD.setAttribute("class", "btn button-d");
     buttonD.innerText = "D";
 
     //
@@ -119,13 +119,13 @@ document.addEventListener('DOMContentLoaded', () => {
     let buttonRight = document.createElement("div");
 
     buttonsRightDiv.setAttribute("class", "buttons-right");
-    buttonUp.setAttribute("class", "button-w");
+    buttonUp.setAttribute("class", "btn button-up");
     buttonUp.innerHTML = "&#11205";
-    buttonLeft.setAttribute("class", "button-a");
+    buttonLeft.setAttribute("class", "btn button-left");
     buttonLeft.innerHTML = "&#11207";
-    buttonDown.setAttribute("class", "button-s");
+    buttonDown.setAttribute("class", "btn button-down");
     buttonDown.innerHTML = "&#11206";
-    buttonRight.setAttribute("class", "button-d");
+    buttonRight.setAttribute("class", "btn button-right");
     buttonRight.innerHTML = "&#11208";
 
     window.onresize = function() {

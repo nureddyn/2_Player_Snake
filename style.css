@@ -24,12 +24,12 @@ header {
     cursor: pointer;
 }
 
-.left {
+.left, .right {
     background: #496989;
     width: 30%;
     padding: 1%;
     padding-top: 10%;
-    /* padding-left: 2%; */
+    padding-left: 8%;
 }
 
 @media screen and (min-width: 600px) {
@@ -46,7 +46,8 @@ header {
     .button-up, .button-left, .button-down, .button-right {
         width: 2em;
         height:2em;
-        border: solid white 1px;
+        border: solid black 1px;
+        box-shadow: black 2px 2px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -81,13 +82,6 @@ header {
     flex-grow: 1;
     max-width: 500px;
     padding: 1%;
-}
-
-.right {
-    background: #496989;
-    width: 30%;
-    padding: 1%;
-    padding-top: 7%;
 }
 
 button {
