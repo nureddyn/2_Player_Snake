@@ -83,11 +83,131 @@ let board = new Board();
 let snake1 = new Snake(board.domElement, board.context, 18);
 let snake2 = new Snake(board.domElement, board.context, 1);
 let food = new Food(board.domElement, board.context);
+
+// Change button appearance
+async function buttonClicked(button) {
+    let baseColor = button.style.background;
+
+    button.style.background = "#387ADF";
+    const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
+    await sleep(100);
+    button.style.background = baseColor;
+};
+
+function changeDirection(e) {
+
+    let button;
+    // Snake 1 events
+    if ((e.code == 'ArrowUp' || (e.button == 0 && e.target.classList.contains("button-up"))) && snake1.velocityY != 1) {
+        snake1.velocityX = 0;
+        snake1.velocityY = -1;
+
+        button = document.querySelector(".button-up");
+        buttonClicked(button);
+    }
+    else if ((e.code == 'ArrowDown' || (e.button == 0 && e.target.classList.contains("button-down"))) && snake1.velocityY != -1) {
+        snake1.velocityX = 0;
+        snake1.velocityY = 1;
+
+        button = document.querySelector(".button-down");
+        buttonClicked(button);
+    }
+    else if ((e.code == 'ArrowLeft' || (e.button == 0 && e.target.classList.contains("button-left"))) && snake1.velocityX != 1) {
+        snake1.velocityX = -1;
+        snake1.velocityY = 0;
+
+        button = document.querySelector(".button-left");
+        buttonClicked(button);
+    }
+    else if ((e.code == 'ArrowRight' || (e.button == 0 && e.target.classList.contains("button-right"))) && snake1.velocityX != -1) {
+        snake1.velocityX = 1;
+        snake1.velocityY = 0;
+
+        button = document.querySelector(".button-right");
+        buttonClicked(button);
+    }
+    // Snake 2 events
+    else if ((e.code == 'KeyW' || (e.button == 0 && e.target.classList.contains("button-w")))&& snake2.velocityY != 1) {
+        snake2.velocityX = 0;
+        snake2.velocityY = -1;
+
+        button = document.querySelector(".button-w");
+        buttonClicked(button);
+    }
+    else if ((e.code == 'KeyS' || (e.button == 0 && e.target.classList.contains("button-s"))) && snake2.velocityY != -1) {
+        snake2.velocityX = 0;
+        snake2.velocityY = 1;
+
+        button = document.querySelector(".button-s");
+        buttonClicked(button);
+    }
+    else if ((e.code == 'KeyA' || (e.button == 0 && e.target.classList.contains("button-a"))) && snake2.velocityX != 1) {
+        snake2.velocityX = -1;
+        snake2.velocityY = 0;
+
+        button = document.querySelector(".button-a");
+        buttonClicked(button);
+    }
+    else if ((e.code == 'KeyD' || (e.button == 0 && e.target.classList.contains("button-d"))) && snake2.velocityX != -1) {
+        snake2.velocityX = 1;
+        snake2.velocityY = 0;
+
+        button = document.querySelector(".button-d");
+        buttonClicked(button);
+    }
+}
+
+function update() {
+    if (gameOver == true) return;
+    board.make();
+    food.make();
+    snake1.eat(food);
+    snake2.eat(food);
+
+    snake1.make();
+    snake2.make();
+
+    if (snake1.head.x < 0 || snake1.head.x > (board.blockSize * board.columns) - 1 ||
+        snake1.head.y < 0 || snake1.head.y > (board.blockSize * board.rows) - 1) {
+        gameOver = true;
+        alert("Game Over");
+        alert("Player 2 wins");
+    }
+    else if (snake2.head.x < 0 || snake2.head.x > (board.blockSize * board.columns) - 1 ||
+        snake2.head.y < 0 || snake2.head.y > (board.blockSize * board.rows) - 1) {
+        gameOver = true;
+        alert("Game Over");
+        alert("Player 1 wins");
+    }
+    else if (Math.round(snake1.head.x / 25) == Math.round(snake2.head.x / 25)
+            && Math.round(snake1.head.y / 25) == Math.round(snake2.head.y / 25)) {
+        alert("Game Over");
+        alert("Tie");
+        document.location.reload();
+    }
+
+    for (let i = 0; i < snake1.body.length; i++) {
+        if (snake1.head.x == snake1.body[i][0] && snake1.head.y == snake1.body[i][1]) {
+            gameOver = true;
+            alert("Game Over");
+            alert("Player 2 wins");
+        }
+    }
+
+    for (let i = 0; i < snake2.body.length; i++) {
+        if (snake2.head.x == snake2.body[i][0] && snake2.head.y == snake2.body[i][1]) {
+            gameOver = true;
+            alert("Game Over");
+            alert("Player 1 wins");
+        }
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
 
     document.addEventListener('keydown', changeDirection);
-    document.addEventListener('keydown', changeDirection);
-    setInterval(update, 1000/10);
+    document.addEventListener('click', changeDirection);
+    setInterval(update, 1500/10);
 
 
 
@@ -150,124 +270,3 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 });
-
-// Change button appearance
-async function buttonClicked(button) {
-    let baseColor = button.style.background;
-    // button.style.background = `mix(${baseColor}, black, 25%)`;
-
-    button.style.background = "#387ADF";
-    const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
-    await sleep(100);
-    button.style.background = baseColor;
-};
-
-function changeDirection(e) {
-
-    let button;
-    // Snake 1 events
-    if (e.code == 'ArrowUp' && snake1.velocityY != 1) {
-        snake1.velocityX = 0;
-        snake1.velocityY = -1;
-
-        button = document.querySelector(".button-up");
-        buttonClicked(button);
-    }
-    else if (e.code == 'ArrowDown' && snake1.velocityY != -1) {
-        snake1.velocityX = 0;
-        snake1.velocityY = 1;
-
-        button = document.querySelector(".button-down");
-        buttonClicked(button);
-    }
-    else if (e.code == 'ArrowLeft' && snake1.velocityX != 1) {
-        snake1.velocityX = -1;
-        snake1.velocityY = 0;
-
-        button = document.querySelector(".button-left");
-        buttonClicked(button);
-    }
-    else if (e.code == 'ArrowRight' && snake1.velocityX != -1) {
-        snake1.velocityX = 1;
-        snake1.velocityY = 0;
-
-        button = document.querySelector(".button-right");
-        buttonClicked(button);
-    }
-    // Snake 2 events
-    else if (e.code == 'KeyW' && snake2.velocityY != 1) {
-        snake2.velocityX = 0;
-        snake2.velocityY = -1;
-
-        button = document.querySelector(".button-w");
-        buttonClicked(button);
-    }
-    else if (e.code == 'KeyS' && snake2.velocityY != -1) {
-        snake2.velocityX = 0;
-        snake2.velocityY = 1;
-
-        button = document.querySelector(".button-s");
-        buttonClicked(button);
-    }
-    else if (e.code == 'KeyA' && snake2.velocityX != 1) {
-        snake2.velocityX = -1;
-        snake2.velocityY = 0;
-
-        button = document.querySelector(".button-a");
-        buttonClicked(button);
-    }
-    else if (e.code == 'KeyD' && snake2.velocityX != -1) {
-        snake2.velocityX = 1;
-        snake2.velocityY = 0;
-
-        button = document.querySelector(".button-d");
-        buttonClicked(button);
-    }
-}
-
-function update() {
-    if (gameOver == true) return;
-    board.make();
-    food.make();
-    snake1.eat(food);
-    snake2.eat(food);
-
-    snake1.make();
-    snake2.make();
-
-    if (snake1.head.x < 0 || snake1.head.x > (board.blockSize * board.columns) - 1 ||
-        snake1.head.y < 0 || snake1.head.y > (board.blockSize * board.rows) - 1) {
-        gameOver = true;
-        alert("Game Over");
-        alert("Player 2 wins");
-    }
-    else if (snake2.head.x < 0 || snake2.head.x > (board.blockSize * board.columns) - 1 ||
-        snake2.head.y < 0 || snake2.head.y > (board.blockSize * board.rows) - 1) {
-        gameOver = true;
-        alert("Game Over");
-        alert("Player 1 wins");
-    }
-    else if (Math.round(snake1.head.x / 25) == Math.round(snake2.head.x / 25)
-            && Math.round(snake1.head.y / 25) == Math.round(snake2.head.y / 25)) {
-        alert("Game Over");
-        alert("Tie");
-        document.location.reload();
-    }
-
-    for (let i = 0; i < snake1.body.length; i++) {
-        if (snake1.head.x == snake1.body[i][0] && snake1.head.y == snake1.body[i][1]) {
-            gameOver = true;
-            alert("Game Over");
-            alert("Player 2 wins");
-        }
-    }
-
-    for (let i = 0; i < snake2.body.length; i++) {
-        if (snake2.head.x == snake2.body[i][0] && snake2.head.y == snake2.body[i][1]) {
-            gameOver = true;
-            alert("Game Over");
-            alert("Player 1 wins");
-        }
-    }
-}
-

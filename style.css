@@ -32,12 +32,14 @@ header {
     padding-left: 8%;
 }
 
+
 @media screen and (min-width: 600px) {
     .buttons-left, .buttons-right {
         width: 7em;
         height: 25%;
         padding-top: 25%;
-        margin-left: 2em;
+        margin-left: -3em;
+        /* border: solid black 1px; */
     }
     .btn {
         background: #7AA2E3;
@@ -70,6 +72,15 @@ header {
     }    
 }
 
+@media screen and (min-width: 965px) {
+    .buttons-left, .buttons-right {
+        width: 7em;
+        height: 25%;
+        padding-top: 25%;
+        margin-left: 2em;
+        /* border: solid black 1px; */
+    }
+}
 
 /*  */
 /* @media screen and (max-width: 599px) {
