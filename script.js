@@ -98,28 +98,36 @@ function changeDirection(e) {
 
     let button;
     // Snake 1 events
-    if ((e.code == 'ArrowUp' || (e.button == 0 && e.target.classList.contains("button-up"))) && snake1.velocityY != 1) {
+    if ((e.code == 'ArrowUp' || 
+        (e.button == 0 && e.target.classList.contains("button-up")))
+        && snake1.velocityY != 1) {
         snake1.velocityX = 0;
         snake1.velocityY = -1;
 
         button = document.querySelector(".button-up");
         buttonClicked(button);
     }
-    else if ((e.code == 'ArrowDown' || (e.button == 0 && e.target.classList.contains("button-down"))) && snake1.velocityY != -1) {
+    else if ((e.code == 'ArrowDown' ||
+        (e.button == 0 && e.target.classList.contains("button-down")))
+        && snake1.velocityY != -1) {
         snake1.velocityX = 0;
         snake1.velocityY = 1;
 
         button = document.querySelector(".button-down");
         buttonClicked(button);
     }
-    else if ((e.code == 'ArrowLeft' || (e.button == 0 && e.target.classList.contains("button-left"))) && snake1.velocityX != 1) {
+    else if ((e.code == 'ArrowLeft' ||
+        (e.button == 0 && e.target.classList.contains("button-left")))
+        && snake1.velocityX != 1) {
         snake1.velocityX = -1;
         snake1.velocityY = 0;
 
         button = document.querySelector(".button-left");
         buttonClicked(button);
     }
-    else if ((e.code == 'ArrowRight' || (e.button == 0 && e.target.classList.contains("button-right"))) && snake1.velocityX != -1) {
+    else if ((e.code == 'ArrowRight' ||
+        (e.button == 0 && e.target.classList.contains("button-right")))
+        && snake1.velocityX != -1) {
         snake1.velocityX = 1;
         snake1.velocityY = 0;
 
@@ -127,28 +135,36 @@ function changeDirection(e) {
         buttonClicked(button);
     }
     // Snake 2 events
-    else if ((e.code == 'KeyW' || (e.button == 0 && e.target.classList.contains("button-w")))&& snake2.velocityY != 1) {
+    else if ((e.code == 'KeyW' ||
+        (e.button == 0 && e.target.classList.contains("button-w")))
+        && snake2.velocityY != 1) {
         snake2.velocityX = 0;
         snake2.velocityY = -1;
 
         button = document.querySelector(".button-w");
         buttonClicked(button);
     }
-    else if ((e.code == 'KeyS' || (e.button == 0 && e.target.classList.contains("button-s"))) && snake2.velocityY != -1) {
+    else if ((e.code == 'KeyS' ||
+        (e.button == 0 && e.target.classList.contains("button-s")))
+        && snake2.velocityY != -1) {
         snake2.velocityX = 0;
         snake2.velocityY = 1;
 
         button = document.querySelector(".button-s");
         buttonClicked(button);
     }
-    else if ((e.code == 'KeyA' || (e.button == 0 && e.target.classList.contains("button-a"))) && snake2.velocityX != 1) {
+    else if ((e.code == 'KeyA' ||
+        (e.button == 0 && e.target.classList.contains("button-a")))
+        && snake2.velocityX != 1) {
         snake2.velocityX = -1;
         snake2.velocityY = 0;
 
         button = document.querySelector(".button-a");
         buttonClicked(button);
     }
-    else if ((e.code == 'KeyD' || (e.button == 0 && e.target.classList.contains("button-d"))) && snake2.velocityX != -1) {
+    else if ((e.code == 'KeyD' ||
+        (e.button == 0 && e.target.classList.contains("button-d")))
+        && snake2.velocityX != -1) {
         snake2.velocityX = 1;
         snake2.velocityY = 0;
 
