@@ -94,6 +94,11 @@ async function buttonClicked(button) {
     button.style.background = baseColor;
 };
 
+function changeCoordinates(snakeN, x, y) {
+    snakeN.velocityX = x;
+    snakeN.velocityY = y;
+}
+
 function changeDirection(e) {
 
     let button;
@@ -101,8 +106,7 @@ function changeDirection(e) {
     if ((e.code == 'ArrowUp' || 
         (e.button == 0 && e.target.classList.contains("button-up")))
         && snake1.velocityY != 1) {
-        snake1.velocityX = 0;
-        snake1.velocityY = -1;
+        changeCoordinates(snake1, 0, -1);
 
         button = document.querySelector(".button-up");
         buttonClicked(button);
@@ -110,8 +114,7 @@ function changeDirection(e) {
     else if ((e.code == 'ArrowDown' ||
         (e.button == 0 && e.target.classList.contains("button-down")))
         && snake1.velocityY != -1) {
-        snake1.velocityX = 0;
-        snake1.velocityY = 1;
+        changeCoordinates(snake1, 0, 1);
 
         button = document.querySelector(".button-down");
         buttonClicked(button);
@@ -119,8 +122,7 @@ function changeDirection(e) {
     else if ((e.code == 'ArrowLeft' ||
         (e.button == 0 && e.target.classList.contains("button-left")))
         && snake1.velocityX != 1) {
-        snake1.velocityX = -1;
-        snake1.velocityY = 0;
+        changeCoordinates(snake1, -1, 0);
 
         button = document.querySelector(".button-left");
         buttonClicked(button);
@@ -128,8 +130,7 @@ function changeDirection(e) {
     else if ((e.code == 'ArrowRight' ||
         (e.button == 0 && e.target.classList.contains("button-right")))
         && snake1.velocityX != -1) {
-        snake1.velocityX = 1;
-        snake1.velocityY = 0;
+        changeCoordinates(snake1, 1, 0);
 
         button = document.querySelector(".button-right");
         buttonClicked(button);
@@ -138,8 +139,7 @@ function changeDirection(e) {
     else if ((e.code == 'KeyW' ||
         (e.button == 0 && e.target.classList.contains("button-w")))
         && snake2.velocityY != 1) {
-        snake2.velocityX = 0;
-        snake2.velocityY = -1;
+        changeCoordinates(snake2, 0, -1);;
 
         button = document.querySelector(".button-w");
         buttonClicked(button);
@@ -147,8 +147,7 @@ function changeDirection(e) {
     else if ((e.code == 'KeyS' ||
         (e.button == 0 && e.target.classList.contains("button-s")))
         && snake2.velocityY != -1) {
-        snake2.velocityX = 0;
-        snake2.velocityY = 1;
+        changeCoordinates(snake2, 0, 1);
 
         button = document.querySelector(".button-s");
         buttonClicked(button);
@@ -156,8 +155,7 @@ function changeDirection(e) {
     else if ((e.code == 'KeyA' ||
         (e.button == 0 && e.target.classList.contains("button-a")))
         && snake2.velocityX != 1) {
-        snake2.velocityX = -1;
-        snake2.velocityY = 0;
+        changeCoordinates(snake2, -1, 0);;
 
         button = document.querySelector(".button-a");
         buttonClicked(button);
@@ -165,8 +163,7 @@ function changeDirection(e) {
     else if ((e.code == 'KeyD' ||
         (e.button == 0 && e.target.classList.contains("button-d")))
         && snake2.velocityX != -1) {
-        snake2.velocityX = 1;
-        snake2.velocityY = 0;
+        changeCoordinates(snake2, 1, 0);
 
         button = document.querySelector(".button-d");
         buttonClicked(button);
